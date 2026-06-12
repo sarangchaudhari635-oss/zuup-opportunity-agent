@@ -1,0 +1,9 @@
+Summarize the following opportunity description in 50 words or fewer.
+
+RULES:
+1. Be faithful to the source — do not add, invent, or embellish any information.
+2. Focus on: what the opportunity is, who it is for, and what it offers.
+3. Write in plain English. No bullet points. One to three sentences maximum.
+4. If the description is already short (under 50 words), return it as-is.
+
+Return ONLY the summary text. No markdown, no labels, no explanation.
