@@ -11,7 +11,7 @@ services:
       POSTGRES_USER: zuup_user
       POSTGRES_PASSWORD: zuup_pass
     ports:
-      - "5432:5432"
+      - "5435:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
@@ -101,7 +101,7 @@ services:
   # ── Next.js Frontend ────────────────────────────────────────
   frontend:
     build:
-      context: ./frontend
+      context: ./zuup-frontend
       dockerfile: Dockerfile.dev
     container_name: zuup_frontend
     restart: unless-stopped
@@ -110,7 +110,7 @@ services:
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8000
     volumes:
-      - ./frontend:/app
+      - ./zuup-frontend:/app
       - /app/node_modules
       - /app/.next
     command: npm run dev
