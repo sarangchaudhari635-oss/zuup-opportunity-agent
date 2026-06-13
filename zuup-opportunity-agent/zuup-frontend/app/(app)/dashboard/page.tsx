@@ -113,7 +113,7 @@ export default function DashboardPage() {
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/opportunities?${params}`, { headers: { Authorization: `Bearer ${token}` } });
     const data = await res.json();
-    setOpps((prev) => reset ? data.items : [...prev, ...data.items]);
+    setOpps((prev) => reset ? (data.items ?? []) : [...prev, ...(data.items ?? [])]);
     setHasNext(data.has_next);
     setTotal(data.total);
     setPage(p);
