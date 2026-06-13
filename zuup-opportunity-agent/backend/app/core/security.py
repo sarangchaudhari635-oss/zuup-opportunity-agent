@@ -1,6 +1,17 @@
 """
 JWT creation, validation, and password hashing.
 """
+# Monkeypatch bcrypt to fix passlib compatibility issues with bcrypt >= 4.1.0
+import bcrypt
+if not hasattr(bcrypt, "__about__"):
+    bcrypt.__about__ = bcrypt
+_original_hashpw = bcrypt.hashpw
+def _patched_hashpw(password: bytes, salt: bytes) -> bytes:
+    if len(password) > 72:
+        password = password[:72]
+    return _original_hashpw(password, salt)
+bcrypt.hashpw = _patched_hashpw
+
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
